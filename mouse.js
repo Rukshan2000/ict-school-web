@@ -29,31 +29,33 @@ document.body.appendChild(tail);
 
 // Track mouse position and update cursor and tail position
 let tailDelay = 0;
-document.addEventListener('mousemove', (e) => {
-  cursor.style.left = `${e.pageX - cursor.offsetWidth / 2}px`;
-  cursor.style.top = `${e.pageY - cursor.offsetHeight / 2}px`;
+if (window.matchMedia("(pointer: fine)").matches) { // Only enable on devices with a pointer (like desktops)
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = `${e.pageX - cursor.offsetWidth / 2}px`;
+    cursor.style.top = `${e.pageY - cursor.offsetHeight / 2}px`;
 
-  // Update the tail's position and make it follow the cursor smoothly
-  tail.style.left = `${e.pageX - 10}px`; // Slight offset for smooth trailing
-  tail.style.top = `${e.pageY - 10}px`;  // Slight offset for smooth trailing
-  
-  // Add a trailing effect for the tail with a glowing "fantasy" stretch
-  setTimeout(() => {
-    tail.style.opacity = '0.3';  // Tail fades as it moves away
-    tail.style.transform = `scale(1.7) translate(-50%, -50%)`; // Tail grows and stretches
-    tail.style.boxShadow = '0 0 30px 15px rgba(255, 102, 204, 0.9)'; // Glowing rose effect for the tail
-  }, tailDelay);
+    // Update the tail's position and make it follow the cursor smoothly
+    tail.style.left = `${e.pageX - 10}px`; // Slight offset for smooth trailing
+    tail.style.top = `${e.pageY - 10}px`;  // Slight offset for smooth trailing
+    
+    // Add a trailing effect for the tail with a glowing "fantasy" stretch
+    setTimeout(() => {
+      tail.style.opacity = '0.3';  // Tail fades as it moves away
+      tail.style.transform = `scale(1.7) translate(-50%, -50%)`; // Tail grows and stretches
+      tail.style.boxShadow = '0 0 30px 15px rgba(255, 102, 204, 0.9)'; // Glowing rose effect for the tail
+    }, tailDelay);
 
-  // Reset tail opacity, transform, and box shadow after a delay to create a fantasy flicker effect
-  setTimeout(() => {
-    tail.style.opacity = '0.7';  // Tail becomes more visible
-    tail.style.transform = `scale(1) translate(-50%, -50%)`; // Reset scale
-    tail.style.boxShadow = '0 0 25px 10px rgba(255, 102, 204, 0.8)'; // Reset rose glow effect
-  }, tailDelay + 200);
+    // Reset tail opacity, transform, and box shadow after a delay to create a fantasy flicker effect
+    setTimeout(() => {
+      tail.style.opacity = '0.7';  // Tail becomes more visible
+      tail.style.transform = `scale(1) translate(-50%, -50%)`; // Reset scale
+      tail.style.boxShadow = '0 0 25px 10px rgba(255, 102, 204, 0.8)'; // Reset rose glow effect
+    }, tailDelay + 200);
 
-  // Gradually increase the delay to make the tail longer and more fluid
-  tailDelay = Math.min(tailDelay + 5, 150); // Gradually increase delay to create longer tail effect
-});
+    // Gradually increase the delay to make the tail longer and more fluid
+    tailDelay = Math.min(tailDelay + 5, 150); // Gradually increase delay to create longer tail effect
+  });
+}
 
 // Left click effect
 document.addEventListener('mousedown', (e) => {
@@ -109,3 +111,9 @@ document.querySelectorAll('body *').forEach(element => {
     cursor.style.transform = 'scale(1)';  // Reset scale
   });
 });
+
+// Disable cursor for mobile (touch) devices
+if (window.matchMedia("(pointer: coarse)").matches) {
+  cursor.style.display = 'none';  // Hide the custom cursor for mobile
+  tail.style.display = 'none';  // Hide the tail as well for mobile
+} 
