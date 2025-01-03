@@ -1,0 +1,123 @@
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: black;
+    color: white;
+    position: sticky; /* This makes the navbar sticky */
+    top: 0; /* Stick to the top of the page */
+    z-index: 1000; /* Ensure it's above other content */
+    width: 100%; /* Ensure the navbar spans the full width */
+}
+
+
+.logo a {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 100px; /* Adjust the size of the logo */
+    height: auto;
+}
+
+.nav-links ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links ul li {
+    margin-right: 20px;
+}
+
+.nav-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.cta-btn {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.burger-menu {
+    display: none;
+    cursor: pointer;
+}
+
+.burger {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.drawer {
+    position: absolute;
+    top: 10;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: black;
+    transition: left 0.3s ease-in-out;
+    padding-top: 60px;
+}
+
+.drawer ul {
+    list-style: none;
+}
+
+.drawer ul li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #444;
+}
+
+.drawer ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .cta-btn {
+        display: none;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .drawer.open {
+        left: 0;
+    }
+
+    .burger.open .burger:nth-child(1) {
+        transform: rotate(-45deg);
+        position: absolute;
+        top: 8px;
+    }
+
+    .burger.open .burger:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger.open .burger:nth-child(3) {
+        transform: rotate(45deg);
+        position: absolute;
+        top: -8px;
+    }
+}
