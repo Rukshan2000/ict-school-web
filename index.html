@@ -24,16 +24,6 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-      /* Hide scrollbar */
-      .carousel::-webkit-scrollbar {
-        display: none;
-      }
-      .carousel {
-        -ms-overflow-style: none; /* Internet Explorer 10+ */
-        scrollbar-width: none; /* Firefox */
-      }
-    </style>
   </head>
 
   <body class="bg-black font-poppins">
@@ -113,6 +103,13 @@
                 <a
                   href="#"
                   class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >CATEGORIES</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >CONTACT</a
                 >
               </li>
@@ -136,34 +133,19 @@
         </video>
         <!-- Image Overlay Section -->
 
-        <!-- Welcome Text -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <h1
-            class="text-white text-4xl font-bold"
-            style="font-family: 'Cyber City', cursive"
-          >
-            Cybernetics
-          </h1>
-        </div>
+<!-- Welcome Text -->
+<div class="absolute inset-0 flex items-center justify-center">
+  <h1
+    class="text-white text-4xl font-bold"
+    style="font-family: 'Mexon', sans-serif;"
+  >
+    Cybernetics'24
+  </h1>
+</div>
+
       </section>
 
-      <section
-        id="image-display"
-        class="h-12 bg-black flex items-center justify-center relative"
-      >
-        <div
-          class="absolute w-full h-full flex items-center justify-center"
-          id="cursor-follower"
-        >
-          <!-- Centered Image -->
-          <img
-            src="assets/cover.webp"
-            alt="Centered Image"
-            class="w-auto h-auto rounded-lg shadow-xl"
-            id="image"
-          />
-        </div>
-      </section>
+ 
 
 
 
@@ -176,161 +158,217 @@
         />
       </head>
 
-      <section id="carousel" class="py-12">
-        <div class="container mx-auto px-2 py-8">
-          <div class="relative">
-            <div
-              id="carousel-container"
-              class="flex overflow-x-auto scroll-smooth snap-x snap-mandatory carousel"
-            >
-              <!-- Card 1 -->
-              <div
-              class="snap-start flex-none w-full lg:w-1/3 bg-gray-900 text-white rounded-xl p-4 mx-2 flex-shrink-0 relative overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-[0_0_20px_#00FFFF, 0_0_30px_#00FFFF, 0_0_50px_#00FFFF]"
-            >
-              <div class="absolute inset-0 h-48 bg-gradient-to-b from-transparent to-gray-900">
-                <img
-                  src="assets/brain.avif"
-                  alt="Card 2 Image"
-                  class="w-full h-full object-cover opacity-70"
-                />
-              </div>
-              <div class="relative z-10 pt-48">
-                <h2 class="text-center text-lg font-bold mt-4 text-blue-400">GAMING COMPETITION</h2>
-                <p class="text-center mt-2 text-gray-300">
-                  Compete in a thrilling gaming competition featuring games like Valorant, COD, and Modern Mafia. The theme for this event is "Battle of the Titans: Master Strategy & Reflexes." It's your chance to showcase your gaming skills in an electrifying showdown of tactical battles, rapid reflexes, and strategic brilliance. Test your abilities and compete to emerge as the ultimate champion in this high-stakes gaming arena.
-                </p>
-                <div class="flex justify-center">
+      <section id="categories" class="py-12">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold mb-8 text-center text-white">Our Categories</h2>
+      
+          <!-- Card Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow">
+              <a href="#">
+                <img class="rounded-t-lg" src="assets/brain.avif" alt="Category Image" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Category 1</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-400">Short description about Category 1.</p>
+      
+                <div class="flex space-x-4">
+                  <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">Register</button>
                   <button
-                    class="mt-4 px-4 py-2 border border-blue-600 text-white rounded-lg bg-transparent transition duration-300 hover:bg-blue-600 hover:shadow-[0_0_15px_5px_rgba(59,130,246,0.7)]"
-                  >
-                    Learn More
-                  </button>
+                    class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                    onclick="openModal(1)">Learn More</button>
                 </div>
               </div>
             </div>
-            
-            
-              <!-- Card 2 -->
-              <div
-              class="snap-start flex-none w-full lg:w-1/3 bg-gray-900 text-white rounded-xl p-4 mx-2 flex-shrink-0 relative overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-[0_0_20px_#00FFFF, 0_0_30px_#00FFFF, 0_0_50px_#00FFFF]"
-            >
-              <div class="absolute inset-0 h-48 bg-gradient-to-b from-transparent to-gray-900">
-                <img
-                  src="assets/brain.avif"
-                  alt="Card 2 Image"
-                  class="w-full h-full object-cover opacity-70"
-                />
-              </div>
-              <div class="relative z-10 pt-48">
-                <h2 class="text-center text-lg font-bold mt-4 text-blue-400">GAMING COMPETITION</h2>
-                <p class="text-center mt-2 text-gray-300">
-                  Compete in a thrilling gaming competition featuring games like Valorant, COD, and Modern Mafia. The theme for this event is "Battle of the Titans: Master Strategy & Reflexes." It's your chance to showcase your gaming skills in an electrifying showdown of tactical battles, rapid reflexes, and strategic brilliance. Test your abilities and compete to emerge as the ultimate champion in this high-stakes gaming arena.
-                </p>
-                <div class="flex justify-center">
+      
+            <!-- Card 2 -->
+            <div class="max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow">
+              <a href="#">
+                <img class="rounded-t-lg" src="assets/brain.avif" alt="Category Image" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Category 2</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-400">Short description about Category 2.</p>
+      
+                <div class="flex space-x-4">
+                  <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">Register</button>
                   <button
-                    class="mt-4 px-4 py-2 border border-blue-600 text-white rounded-lg bg-transparent transition duration-300 hover:bg-blue-600 hover:shadow-[0_0_15px_5px_rgba(59,130,246,0.7)]"
-                  >
-                    Learn More
-                  </button>
+                    class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                    onclick="openModal(2)">Learn More</button>
                 </div>
               </div>
             </div>
-            
-              <!-- Card 3 -->
-              <div
-              class="snap-start flex-none w-full lg:w-1/3 bg-gray-900 text-white rounded-xl p-4 mx-2 flex-shrink-0 relative overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-[0_0_20px_#00FFFF, 0_0_30px_#00FFFF, 0_0_50px_#00FFFF]"
-            >
-              <div class="absolute inset-0 h-48 bg-gradient-to-b from-transparent to-gray-900">
-                <img
-                  src="assets/brain.avif"
-                  alt="Card 2 Image"
-                  class="w-full h-full object-cover opacity-70"
-                />
-              </div>
-              <div class="relative z-10 pt-48">
-                <h2 class="text-center text-lg font-bold mt-4 text-blue-400">GAMING COMPETITION</h2>
-                <p class="text-center mt-2 text-gray-300">
-                  Compete in a thrilling gaming competition featuring games like Valorant, COD, and Modern Mafia. The theme for this event is "Battle of the Titans: Master Strategy & Reflexes." It's your chance to showcase your gaming skills in an electrifying showdown of tactical battles, rapid reflexes, and strategic brilliance. Test your abilities and compete to emerge as the ultimate champion in this high-stakes gaming arena.
-                </p>
-                <div class="flex justify-center">
+      
+            <!-- Card 3 -->
+            <div class="max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow">
+              <a href="#">
+                <img class="rounded-t-lg" src="assets/brain.avif" alt="Category Image" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Category 3</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-400">Short description about Category 3.</p>
+      
+                <div class="flex space-x-4">
+                  <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">Register</button>
                   <button
-                    class="mt-4 px-4 py-2 border border-blue-600 text-white rounded-lg bg-transparent transition duration-300 hover:bg-blue-600 hover:shadow-[0_0_15px_5px_rgba(59,130,246,0.7)]"
-                  >
-                    Learn More
-                  </button>
+                    class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                    onclick="openModal(3)">Learn More</button>
                 </div>
               </div>
-            </div>
-              <!-- Card 4 -->
-              <!-- Card 3 -->
-              <div
-              class="snap-start flex-none w-full lg:w-1/3 bg-gray-900 text-white rounded-xl p-4 mx-2 flex-shrink-0 relative overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-[0_0_20px_#00FFFF, 0_0_30px_#00FFFF, 0_0_50px_#00FFFF]"
-            >
-              <div class="absolute inset-0 h-48 bg-gradient-to-b from-transparent to-gray-900">
-                <img
-                  src="assets/brain.avif"
-                  alt="Card 2 Image"
-                  class="w-full h-full object-cover opacity-70"
-                />
-              </div>
-              <div class="relative z-10 pt-48">
-                <h2 class="text-center text-lg font-bold mt-4 text-blue-400">GAMING COMPETITION</h2>
-                <p class="text-center mt-2 text-gray-300">
-                  Compete in a thrilling gaming competition featuring games like Valorant, COD, and Modern Mafia. The theme for this event is "Battle of the Titans: Master Strategy & Reflexes." It's your chance to showcase your gaming skills in an electrifying showdown of tactical battles, rapid reflexes, and strategic brilliance. Test your abilities and compete to emerge as the ultimate champion in this high-stakes gaming arena.
-                </p>
-                <div class="flex justify-center">
-                  <button
-                    class="mt-4 px-4 py-2 border border-blue-600 text-white rounded-lg bg-transparent transition duration-300 hover:bg-blue-600 hover:shadow-[0_0_15px_5px_rgba(59,130,246,0.7)]"
-                  >
-                    Learn More
-                  </button>
-                </div>
-              </div>
-            </div>
             </div>
 
-            <!-- Navigation Buttons -->
-            <div class="flex justify-center mt-4 space-x-4">
-              <button
-                id="prev"
-                class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center"
-              >
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button
-                id="next"
-                class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center"
-              >
-                <i class="fas fa-chevron-right"></i>
-              </button>
+            <!-- Card 4 -->
+            <div class="max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow">
+              <a href="#">
+                <img class="rounded-t-lg" src="assets/brain.avif" alt="Category Image" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Category 1</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-400">Short description about Category 1.</p>
+      
+                <div class="flex space-x-4">
+                  <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">Register</button>
+                  <button
+                    class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                    onclick="openModal(4)">Learn More</button>
+                </div>
+              </div>
             </div>
 
-            <!-- Dots for Carousel -->
-            <div class="flex justify-center mt-4 space-x-2">
-              <span
-                class="dot w-3 h-3 bg-gray-600 rounded-full cursor-pointer"
-              ></span>
-              <span
-                class="dot w-3 h-3 bg-gray-600 rounded-full cursor-pointer"
-              ></span>
-              <span
-                class="dot w-3 h-3 bg-gray-600 rounded-full cursor-pointer"
-              ></span>
-              <span
-                class="dot w-3 h-3 bg-gray-600 rounded-full cursor-pointer"
-              ></span>
+            <!-- Card 5 -->
+            <div class="max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow">
+              <a href="#">
+                <img class="rounded-t-lg" src="assets/brain.avif" alt="Category Image" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Category 1</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-400">Short description about Category 1.</p>
+      
+                <div class="flex space-x-4">
+                  <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">Register</button>
+                  <button
+                    class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                    onclick="openModal(5)">Learn More</button>
+                </div>
+              </div>
             </div>
+
+            <!-- Card 6 -->
+            <div class="max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow">
+              <a href="#">
+                <img class="rounded-t-lg" src="assets/brain.avif" alt="Category Image" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Category 1</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-400">Short description about Category 1.</p>
+      
+                <div class="flex space-x-4">
+                  <button class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">Register</button>
+                  <button
+                    class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                    onclick="openModal(6)">Learn More</button>
+                </div>
+              </div>
+            </div>
+            <!-- Repeat the card structure for cards 4, 5, and 6 -->
+      
           </div>
         </div>
-        
       </section>
+
+<!-- Modal (popup) -->
+<!-- Separate Modals for Each Card -->
+<div id="modal-1" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h3 class="text-2xl font-bold mb-4 text-white">Category 1 Details</h3>
+    <p class="text-gray-300 mb-6">Here is more detailed information about Category 1.</p>
+    <button onclick="closeModal(1)" class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Close</button>
+  </div>
+</div>
+
+<div id="modal-2" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h3 class="text-2xl font-bold mb-4 text-white">Category 2 Details</h3>
+    <p class="text-gray-300 mb-6">Here is more detailed information about Category 2.</p>
+    <button onclick="closeModal(2)" class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Close</button>
+  </div>
+</div>
+
+<div id="modal-3" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h3 class="text-2xl font-bold mb-4 text-white">Category 3 Details</h3>
+    <p class="text-gray-300 mb-6">Here is more detailed information about Category 3.</p>
+    <button onclick="closeModal(3)" class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Close</button>
+  </div>
+</div>
+<!-- Modal for Category 4 -->
+<div id="modal-4" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h3 class="text-2xl font-bold mb-4 text-white">Category 4 Details</h3>
+    <p class="text-gray-300 mb-6">Here is more detailed information about Category 4.</p>
+    <button onclick="closeModal(4)" class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Close</button>
+  </div>
+</div>
+
+<!-- Modal for Category 5 -->
+<div id="modal-5" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h3 class="text-2xl font-bold mb-4 text-white">Category 5 Details</h3>
+    <p class="text-gray-300 mb-6">Here is more detailed information about Category 5.</p>
+    <button onclick="closeModal(5)" class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Close</button>
+  </div>
+</div>
+
+<!-- Modal for Category 6 -->
+<div id="modal-6" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h3 class="text-2xl font-bold mb-4 text-white">Category 6 Details</h3>
+    <p class="text-gray-300 mb-6">Here is more detailed information about Category 6.</p>
+    <button onclick="closeModal(6)" class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Close</button>
+  </div>
+</div>
+
+ 
+      
+      <style>
+        /* Ensure that 3 cards are displayed at once */
+        #carousel-container {
+          display: flex;
+          gap: 16px; /* Adjust the gap between cards */
+          width: 100%;
+        }
+      
+        .card {
+          min-width: calc(33.33% - 16px); /* Adjust width to show 3 cards */
+          flex-shrink: 0;
+        }
+      </style>
+      
 
       <section id="about-us" class="py-16 bg-black text-white">
         <div class="container mx-auto px-6">
           <div class="text-center mb-12">
-            <h2 class="text-4xl font-semibold text-white mb-4">
-              Cybernetics ICT Day
-            </h2>
+            <div class="flex justify-center items-center n">
+              <img
+                src="assets/cover.webp"
+                alt="Cybernetics ICT Day"
+                class="w-1/3 h-auto object-cover"
+              />
+            </div>
+            
             <p class="text-lg text-gray-400">
               Cybernetics ICT Day celebrates the dynamic intersection of
               technology and human interaction. Through hands-on workshops and
@@ -344,16 +382,17 @@
           <div
             class="flex flex-col lg:flex-row items-center justify-between gap-8"
           >
-            <!-- Image Section -->
-            <div
-              class="lg:w-1/2 bg-gray-800 rounded-lg shadow-lg overflow-hidden"
-            >
-              <img
-                src="assets/brain.avif"
-                alt="Cybernetics ICT Day Image"
-                class="w-full h-full object-cover"
-              />
-            </div>
+          <div class="lg:w-1/2 bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <video
+              class="w-full h-full object-cover"
+              src="assets/about.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+            ></video>
+          </div>
+          
 
             <!-- Text Section -->
             <div class="lg:w-1/2 text-center lg:text-left">
@@ -375,149 +414,118 @@
         </div>
       </section>
 
-      <section id="our-team" class="py-16 bg-gray-900 text-white">
-        <div class="container mx-auto px-6">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl font-semibold text-white mb-4">
-              Meet Our Team
-            </h2>
-            <p class="text-lg text-gray-400">
-              Our dedicated board members are at the heart of Cybernetics ICT
-              Day, leading the way with their vision, expertise, and passion for
-              technology.
-            </p>
-          </div>
+    
+        <section id="carousel" class="py-12">
+          <div class="container mx-auto px-2 py-8">
+            <div class="relative">
+              <!-- Carousel Container -->
+              <div
+                id="carousel-container"
+                class="flex overflow-hidden scroll-smooth snap-x snap-mandatory"
+              >
+                <!-- Card 1 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>
+        
+                <!-- Card 2 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>
+        
+                <!-- Card 3 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>
 
-          <!-- President Row -->
-          <div class="flex justify-center mb-12">
-            <div class="w-64 bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">John Doe</h3>
-                <p class="text-gray-400">President</p>
-              </div>
-            </div>
-          </div>
+                <!-- Card 4 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>
+        
+                <!-- Card 5 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>
+        
+                <!-- Card 6 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>
 
-          <!-- Board Members Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            <!-- Board Member 1 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">Jane Smith</h3>
-                <p class="text-gray-400">Board Member</p>
-              </div>
-            </div>
-            <!-- Board Member 2 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">Alice Johnson</h3>
-                <p class="text-gray-400">Board Member</p>
-              </div>
-            </div>
-            <!-- Board Member 3 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">Mark Lee</h3>
-                <p class="text-gray-400">Board Member</p>
-              </div>
-            </div>
+                <!-- Card 7 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>
+        
+                <!-- Card 8 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>  
 
-            <!-- Board Member 4 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">Emma Davis</h3>
-                <p class="text-gray-400">Board Member</p>
-              </div>
-            </div>
-            <!-- Board Member 5 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">Ethan Harris</h3>
-                <p class="text-gray-400">Board Member</p>
-              </div>
-            </div>
-            <!-- Board Member 6 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">Sophia Walker</h3>
-                <p class="text-gray-400">Board Member</p>
-              </div>
-            </div>
+                <!-- Card 9 -->
+                <div class="card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                  <img src="assets/officiel.jpg" alt="Board Member 1" class="w-full h-64 object-cover" />
+                  <div class="p-4 text-center">
+                    <h3 class="text-xl font-semibold">Sophia Walker</h3>
+                    <p class="text-gray-400">Board Member</p>
+                  </div>
+                </div>
+        
+                <!-- Add more cards here if needed -->
 
-            <!-- Board Member 7 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">William Brown</h3>
-                <p class="text-gray-400">Board Member</p>
               </div>
-            </div>
-            <!-- Board Member 8 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">Olivia Jones</h3>
-                <p class="text-gray-400">Board Member</p>
-              </div>
-            </div>
-            <!-- Board Member 9 -->
-            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="assets/officiel.jpg"
-                alt="Board Member 1"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4 text-center">
-                <h3 class="text-xl font-semibold">Liam Garcia</h3>
-                <p class="text-gray-400">Board Member</p>
+        
+              <!-- Navigation Buttons -->
+              <div class="flex justify-center mt-4 space-x-4">
+                <button
+                  id="prev"
+                  class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center"
+                >
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button
+                  id="next"
+                  class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center"
+                >
+                  <i class="fas fa-chevron-right"></i>
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <section id="contact-us" class="py-16 bg-gray-800 text-white">
         <div class="container mx-auto px-4">
@@ -637,7 +645,7 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="mouse.js"></script>
+    <!-- <script src="mouse.js"></script> -->
 
   </body>
 </html>

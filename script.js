@@ -11,55 +11,81 @@ toggleButton.addEventListener('click', () => {
 });
 
 // ------------------ Carousel Scroll ------------------
-// Carousel navigation
-const carouselContainer = document.getElementById('carousel-container');
+
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
-const dots = document.querySelectorAll('.dot');
-let currentIndex = 0;
+const carouselContainer = document.getElementById('carousel-container');
 
-// Function to update the active dot
-function updateDots() {
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentIndex);
-    });
+let scrollAmount = 0;
+
+// Check if the screen is mobile-sized (width <= 768px)
+function isMobile() {
+  return window.innerWidth <= 768; // You can adjust this width based on your design
 }
 
-// Scroll to the previous card
-prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + dots.length) % dots.length;
-    updateDots();
-    carouselContainer.scrollBy({
-        left: -carouselContainer.offsetWidth,
-        behavior: 'smooth'
-    });
-});
+function updateCardWidth() {
+  // Dynamically get the width of a single card + 16px padding/margin
+  return carouselContainer.querySelector('.card').offsetWidth + 16;
+}
 
-// Scroll to the next card
 nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % dots.length;
-    updateDots();
-    carouselContainer.scrollBy({
-        left: carouselContainer.offsetWidth,
-        behavior: 'smooth'
-    });
+  const cardWidth = updateCardWidth();
+  const cardsToScroll = 1; // Scroll 1 card at a time
+
+  const maxScroll = carouselContainer.scrollWidth - carouselContainer.offsetWidth;
+
+  // If scrollAmount exceeds max scroll, reset to the beginning
+  if (scrollAmount + cardWidth > maxScroll) {
+    scrollAmount = 0;
+  } else {
+    scrollAmount += cardWidth; // Scroll one card at a time
+  }
+
+  carouselContainer.scrollTo({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
 });
 
-// Function to auto-scroll the carousel every 5 seconds
-function autoScroll() {
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % dots.length;
-        updateDots();
-        carouselContainer.scrollBy({
-            left: carouselContainer.offsetWidth,
-            behavior: 'smooth'
-        });
-    }, 5000); // 5 seconds interval
-}
+prevBtn.addEventListener('click', () => {
+  const cardWidth = updateCardWidth();
+  const cardsToScroll = 1; // Scroll 1 card at a time
 
-// Initialize dots
-updateDots();
+  // If scrollAmount is less than 0, reset to the end
+  if (scrollAmount - cardWidth < 0) {
+    scrollAmount = carouselContainer.scrollWidth - carouselContainer.offsetWidth;
+  } else {
+    scrollAmount -= cardWidth; // Scroll one card at a time
+  }
 
-// Start auto-scrolling
-autoScroll();
+  carouselContainer.scrollTo({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+});
+
+// Add an event listener to handle screen resizing dynamically
+window.addEventListener('resize', () => {
+  scrollAmount = 0; // Reset the scroll amount on resize
+  carouselContainer.scrollTo({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+});
+
+
+//---------------category------------------//
+
+// Function to open modal
+function openModal(cardNumber) {
+    const modal = document.getElementById(`modal-${cardNumber}`);
+    modal.classList.remove('hidden');
+  }
+
+  // Function to close modal for each card
+  function closeModal(cardNumber) {
+    const modal = document.getElementById(`modal-${cardNumber}`);
+    modal.classList.add('hidden');
+  }
+  
 

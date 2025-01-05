@@ -1,0 +1,19 @@
+      /* Hide scrollbar */
+      .carousel::-webkit-scrollbar {
+        display: none;
+      }
+      .carousel {
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+      }
+      @font-face {
+  font-family: 'Mexon';
+  src: url('/assets/Mexon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Apply the font to the specific element */
+h1 {
+  font-family: 'Mexon', sans-serif;
+}
