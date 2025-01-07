@@ -88,18 +88,5 @@
         "grade": "10",
         "password": "password150",
         "events": ["event3", "event4"]
-    },
-    {
-        "name": "Rukshan Tharindu Rupasinghe",
-        "email": "user@gmail.com",
-        "id": "2121212",
-        "school": "artare",
-        "grade": "12",
-        "password": "121221212",
-        "events": [
-          "event1",
-          "event2",
-          "event3"
-        ]
-      }
+    }
 ]
