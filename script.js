@@ -1,14 +1,23 @@
-// ------------------ Mobile Menu Toggle ------------------
+  // ------------------ Mobile Menu Toggle ------------------
 
-const toggleButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
-const navMenu = document.getElementById('navbar-sticky');
+  const toggleButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
+  const navMenu = document.getElementById('navbar-sticky');
+  const navLinks = navMenu.querySelectorAll('a'); // Select all the navigation links
 
-// Toggle the mobile menu visibility
-toggleButton.addEventListener('click', () => {
-    const expanded = toggleButton.getAttribute('aria-expanded') === 'true' || false;
-    toggleButton.setAttribute('aria-expanded', !expanded);
-    navMenu.classList.toggle('hidden');
-});
+  // Toggle the mobile menu visibility
+  toggleButton.addEventListener('click', () => {
+      const expanded = toggleButton.getAttribute('aria-expanded') === 'true' || false;
+      toggleButton.setAttribute('aria-expanded', !expanded);
+      navMenu.classList.toggle('hidden');
+  });
+
+  // Close the menu when any link is clicked
+  navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+          navMenu.classList.add('hidden'); // Hide the menu
+          toggleButton.setAttribute('aria-expanded', 'false'); // Set button to collapsed state
+      });
+  });
 
 // ------------------ Carousel Scroll ------------------
 
