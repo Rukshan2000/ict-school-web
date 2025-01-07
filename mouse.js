@@ -63,7 +63,7 @@ document.addEventListener('mousedown', (e) => {
   if (e.button === 0) { // Left click
     cursor.style.transform = 'scale(1.6)';
     cursor.style.border = '5px solid white'; // White border on click
-    cursor.style.boxShadow = '0 0 50px 30px rgba(255, 255, 255, 1)';
+    cursor.style.boxShadow = '0 0 50px 30px rgba(255, 255, 255, 5)';
   }
 });
 
@@ -72,14 +72,14 @@ document.addEventListener('mousedown', (e) => {
   if (e.button === 2) { // Right click
     cursor.style.transform = 'scale(1.6)';
     cursor.style.border = '5px solid white'; // White border on right click
-    cursor.style.boxShadow = '0 0 50px 30px rgba(255, 255, 255, 1)';
+    cursor.style.boxShadow = '0 0 50px 30px rgba(255, 255, 255, 5)';
   }
 });
 
 // Reset cursor after click
 document.addEventListener('mouseup', () => {
   cursor.style.transform = 'scale(1)';
-  cursor.style.boxShadow = '0 0 25px 10px rgba(255, 255, 255, 0.8)'; // Reset box-shadow
+  cursor.style.boxShadow = '0 0 25px 10px rgba(255, 255, 255, 0.5)'; // Reset box-shadow
   cursor.style.border = '5px solid white'; // Reset to white border
 });
 
@@ -87,11 +87,11 @@ document.addEventListener('mouseup', () => {
 document.addEventListener('wheel', () => {
   cursor.style.transform = 'scale(1.2)';
   cursor.style.border = '5px solid white'; // White border on scroll
-  cursor.style.boxShadow = '0 0 30px 15px rgba(255, 255, 255, 0.9)'; // Glowing effect on scroll
+  cursor.style.boxShadow = '0 0 30px 15px rgba(255, 255, 255, 0.5)'; // Glowing effect on scroll
 
   setTimeout(() => {
     cursor.style.transform = 'scale(1)'; // Reset scale
-    cursor.style.boxShadow = '0 0 25px 10px rgba(255, 255, 255, 0.8)'; // Reset box-shadow
+    cursor.style.boxShadow = '0 0 25px 10px rgba(255, 255, 255, 0.5)'; // Reset box-shadow
   }, 300); // Reset after a small delay
 });
 
@@ -102,7 +102,7 @@ document.querySelectorAll('body *').forEach(element => {
     cursor.style.height = '12px';
     cursor.style.backgroundColor = 'transparent'; // Keep transparent background
     cursor.style.border = '5px solid white'; // White border
-    cursor.style.boxShadow = '0 0 40px 20px rgba(255, 255, 255, 0.9)';
+    cursor.style.boxShadow = '0 0 40px 20px rgba(255, 255, 255, 0.5)';
     cursor.style.transform = 'scale(1.4)'; // Slight scale-up effect for interaction
   });
   element.addEventListener('mouseleave', () => {
@@ -110,7 +110,7 @@ document.querySelectorAll('body *').forEach(element => {
     cursor.style.height = '40px'; // Reset to larger size
     cursor.style.backgroundColor = 'transparent'; // Reset to transparent background
     cursor.style.border = '5px solid white'; // White border
-    cursor.style.boxShadow = '0 0 25px 10px rgba(255, 255, 255, 0.8)';
+    cursor.style.boxShadow = '0 0 25px 10px rgba(255, 255, 255, 0.5)';
     cursor.style.transform = 'scale(1)';  // Reset scale
   });
 });
