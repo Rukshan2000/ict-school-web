@@ -1,4 +1,7 @@
-      /* Hide scrollbar */
+html {
+  scroll-behavior: smooth;
+}
+/* Hide scrollbar */
       .carousel::-webkit-scrollbar {
         display: none;
       }
