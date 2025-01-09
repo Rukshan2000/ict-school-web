@@ -1,5 +1,6 @@
-[
-    {
+{
+    "students": {
+      "student1": {
         "name": "John Doe",
         "email": "john.doe@example.com",
         "id": "12345",
@@ -7,8 +8,8 @@
         "grade": "10",
         "password": "password123",
         "events": ["event1", "event3"]
-    },
-    {
+      },
+      "student2": {
         "name": "Jane Smith",
         "email": "jane.smith@example.com",
         "id": "67890",
@@ -16,8 +17,8 @@
         "grade": "12",
         "password": "password456",
         "events": ["event2", "event4", "event5"]
-    },
-    {
+      },
+      "student3": {
         "name": "Alice Johnson",
         "email": "alice.johnson@example.com",
         "id": "23456",
@@ -25,68 +26,7 @@
         "grade": "10",
         "password": "password789",
         "events": ["event1", "event4"]
-    },
-    {
-        "name": "Bob Williams",
-        "email": "bob.williams@example.com",
-        "id": "34567",
-        "school": "XYZ School",
-        "grade": "11",
-        "password": "password101",
-        "events": ["event2", "event5"]
-    },
-    {
-        "name": "Charlie Brown",
-        "email": "charlie.brown@example.com",
-        "id": "45678",
-        "school": "ABC School",
-        "grade": "12",
-        "password": "password112",
-        "events": ["event3", "event5"]
-    },
-    {
-        "name": "David Lee",
-        "email": "david.lee@example.com",
-        "id": "56789",
-        "school": "XYZ School",
-        "grade": "10",
-        "password": "password113",
-        "events": ["event1", "event2"]
-    },
-    {
-        "name": "Eva Green",
-        "email": "eva.green@example.com",
-        "id": "67891",
-        "school": "ABC School",
-        "grade": "11",
-        "password": "password121",
-        "events": ["event4", "event3"]
-    },
-    {
-        "name": "Frank Harris",
-        "email": "frank.harris@example.com",
-        "id": "78901",
-        "school": "XYZ School",
-        "grade": "12",
-        "password": "password130",
-        "events": ["event2", "event3"]
-    },
-    {
-        "name": "Grace Davis",
-        "email": "grace.davis@example.com",
-        "id": "89012",
-        "school": "ABC School",
-        "grade": "11",
-        "password": "password141",
-        "events": ["event1", "event5"]
-    },
-    {
-        "name": "Henry Moore",
-        "email": "henry.moore@example.com",
-        "id": "90123",
-        "school": "XYZ School",
-        "grade": "10",
-        "password": "password150",
-        "events": ["event3", "event4"]
+      }
     }
-]
+  }
+  
