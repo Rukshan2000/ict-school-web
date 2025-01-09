@@ -1,242 +1,195 @@
-let students = [];
-let currentPage = 1;
-const studentsPerPage = 5;
-let adminPassword = '';  // Variable to hold the correct admin password
+const firebaseConfig = {
+    apiKey: "AIzaSyDEaGjr6EqagrOHH6J9HTh9H6dWkWGjlZY",
+    authDomain: "ict-project-35ae5.firebaseapp.com",
+    databaseURL: "https://ict-project-35ae5-default-rtdb.firebaseio.com",
+    projectId: "ict-project-35ae5",
+    storageBucket: "ict-project-35ae5.firebasestorage.app",
+    messagingSenderId: "904522249416",
+    appId: "1:904522249416:web:498d1c011b439e621561fd",
+    measurementId: "G-BWQPS1GLV8"
+  };
 
-// Fetch admin password from data/admin.json
-async function fetchAdminPassword() {
-    try {
-        const response = await fetch('data/admin.json');
-        const data = await response.json();
-        adminPassword = data.password;
-        console.log('Admin password fetched:', adminPassword); // Debugging fetched password
-    } catch (error) {
-        console.error("Error fetching admin password:", error);
-    }
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // Pagination Settings
+  const itemsPerPage = 5;
+  let currentPage = 1;
+  let totalStudents = 0;
+
+  // Event Data
+  const eventsData = {
+    event1: { name: "Quiz Competition" },
+    event2: { name: "Video Editing" },
+    event3: { name: "Animation Competition" },
+    event4: { name: "Web Designing" },
+    event5: { name: "Digital Art" },
+    event6: { name: "Photo Manipulation" }
+  };
+
+  // Fetch total student count
+  function getTotalStudentCount() {
+    return db.ref('students').once('value').then(snapshot => {
+      totalStudents = snapshot.numChildren();
+      updatePageInfo();
+    });
+  }
+
+  // Fetch students with pagination
+let lastStudentKey = null;
+
+function fetchStudents(page) {
+const itemsPerPage = 5;
+
+// Determine the query based on the current page
+let query = db.ref('students').orderByKey().limitToFirst(itemsPerPage);
+
+if (lastStudentKey && page > 1) {
+  query = db.ref('students').orderByKey().startAfter(lastStudentKey).limitToFirst(itemsPerPage);
 }
 
-// Password authentication
-function authenticateAdmin() {
-    const enteredPassword = prompt("Enter admin password:");
-
-    if (enteredPassword === adminPassword) {
-        fetchData(); // Fetch and display data if the password is correct
-    } else {
-        console.log('Incorrect password entered:', enteredPassword); // Debugging wrong input
-        alert("Incorrect password. Access denied.");
-    }
+query.once('value').then(snapshot => {
+  const students = snapshot.val();
+  if (students) {
+    const studentKeys = Object.keys(students);
+    lastStudentKey = studentKeys[studentKeys.length - 1]; // Store the key of the last student for next page
+    displayStudents(students);
+    currentPage = page;
+    updatePageInfo();
+  }
+});
 }
 
-// Fetch data from the students JSON file
-async function fetchData() {
-    try {
-        const response = await fetch('data/students.json');
-        students = await response.json();
-        console.log('Fetched Students:', students); // Debugging fetched data
-        displayStudents();
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
-}
-
-// Filter function
-function filterData() {
-    const grade = document.getElementById('grade-filter').value;
-    const event = document.getElementById('event-filter').value;
-    const school = document.getElementById('school-filter').value;
-
-    console.log('Filters:', { grade, event, school });  // Debugging selected filter values
-
-    let filteredStudents = students;
-
-    if (grade) {
-        filteredStudents = filteredStudents.filter(student => student.grade === grade);
-    }
-    if (event) {
-        filteredStudents = filteredStudents.filter(student => student.events.includes(event));
-    }
-    if (school) {
-        filteredStudents = filteredStudents.filter(student => student.school === school);
-    }
-
-    console.log('Filtered Students:', filteredStudents);  // Debugging filtered students
-    displayStudents(filteredStudents);
-}
-
-// Reset filters function
-function resetFilters() {
-    document.getElementById('grade-filter').value = '';
-    document.getElementById('event-filter').value = '';
-    document.getElementById('school-filter').value = '';
-    filterData(); // Call filterData to reset the table
-}
-
-// Display students
-function displayStudents(filteredStudents = students) {
+  // Display student data
+  function displayStudents(students, offset) {
     const tableBody = document.getElementById('student-table-body');
     tableBody.innerHTML = '';
 
-    // Paginate the students
-    const start = (currentPage - 1) * studentsPerPage;
-    const end = start + studentsPerPage;
-    const paginatedStudents = filteredStudents.slice(start, end);
-
-    paginatedStudents.forEach(student => {
-        const row = document.createElement('tr');
-        row.classList.add('border-b', 'hover:bg-gray-700', 'text-white');
-        
-        row.innerHTML = `
-            <td class="px-4 py-2">${student.name}</td>
-            <td class="px-4 py-2">${student.email}</td>
-            <td class="px-4 py-2">${student.id}</td>
-            <td class="px-4 py-2">${student.school}</td>
-            <td class="px-4 py-2">${student.grade}</td>
-            <td class="px-4 py-2">${student.events.join(', ')}</td>
-        `;
-        tableBody.appendChild(row);
+    Object.keys(students).forEach((key, index) => {
+      const student = students[key];
+      const studentEvents = student.events.map(eventKey => eventsData[eventKey]?.name || 'N/A').join(", ");
+      const row = `
+        <tr>
+          <td class="p-4">${student.name}</td>
+          <td class="p-4">${student.email}</td>
+          <td class="p-4">${student.school}</td>
+          <td class="p-4">${student.grade}</td>
+          <td class="p-4">${student.id}</td>
+          <td class="p-4">${studentEvents}</td>
+          <td class="p-4 flex space-x-2">
+            <button class="bg-yellow-500 hover:bg-yellow-600 p-2 rounded-lg" onclick="editStudent('${key}')">
+              <span class="material-icons">edit</span>
+            </button>
+            <button class="bg-red-500 hover:bg-red-600 p-2 rounded-lg" onclick="deleteStudent('${key}')">
+              <span class="material-icons">delete</span>
+            </button>
+          </td>
+        </tr>
+      `;
+      tableBody.innerHTML += row;
     });
+  }
 
-    updatePagination(filteredStudents);
-}
+  // Edit student function
+  function editStudent(studentKey) {
+    const studentRef = db.ref('students/' + studentKey);
+    studentRef.once('value', snapshot => {
+      const student = snapshot.val();
+      document.getElementById('edit-name').value = student.name;
+      document.getElementById('edit-email').value = student.email;
+      document.getElementById('edit-school').value = student.school;
+      document.getElementById('edit-grade').value = student.grade;
+      document.getElementById('edit-id').value = student.id;
+      document.getElementById('edit-password').value = student.password;
+          events: Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value)
+      document.getElementById('edit-form').onsubmit = function(e) {
+        e.preventDefault();
+        const updatedStudent = {
+          name: document.getElementById('edit-name').value,
+          email: document.getElementById('edit-email').value,
+          school: document.getElementById('edit-school').value,
+          grade: document.getElementById('edit-grade').value,
+          id: document.getElementById('edit-id').value,
+          password: document.getElementById('edit-password').value,
+          events: Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value)
+        };
+        studentRef.update(updatedStudent);
+        closeModal();
+        fetchStudents(currentPage);
+      };
+      openModal();
+    });
+  }
 
-// Update pagination buttons
-function updatePagination(filteredStudents) {
-    const totalPages = Math.ceil(filteredStudents.length / studentsPerPage);
-    const pagination = document.getElementById('pagination');
-    pagination.innerHTML = '';
-
-    for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement('button');
-        pageButton.classList.add('px-4', 'py-2', 'mx-1', 'bg-gray-700', 'text-white', 'rounded');
-        pageButton.textContent = i;
-        pageButton.onclick = () => changePage(i);
-        pagination.appendChild(pageButton);
+  // Delete student function
+  function deleteStudent(studentKey) {
+    if (confirm("Are you sure you want to delete this student?")) {
+      db.ref('students/' + studentKey).remove();
+      fetchStudents(currentPage);
     }
-}
+  }
 
-// Change page
-function changePage(page) {
-    currentPage = page;
-    displayStudents();
-}
+  // Open modal
+  function openModal() {
+    document.getElementById('edit-modal').classList.remove('hidden');
+  }
 
-// On page load, fetch the admin password
-window.onload = async function() {
-    await fetchAdminPassword(); // Wait until the password is fetched
-    authenticateAdmin(); // Then ask for password
-};
+  // Close modal
+  function closeModal() {
+    document.getElementById('edit-modal').classList.add('hidden');
+  }
 
-// Function to convert the form data into a JSON object
-function convertToJson() {
-    // Collect values from the form
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const id = document.getElementById('id').value;
-    const school = document.getElementById('school').value;
-    const grade = document.getElementById('grade').value;
-    const password = document.getElementById('password').value;
+  // Update pagination info
+  function updatePageInfo() {
+    const pageInfo = document.getElementById('page-info');
+    const totalPages = Math.ceil(totalStudents / itemsPerPage);
+    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+  }
 
-    // Collect checked events
-    const selectedEvents = [];
-    if (document.getElementById('event1').checked) selectedEvents.push('event1');
-    if (document.getElementById('event2').checked) selectedEvents.push('event2');
-    if (document.getElementById('event3').checked) selectedEvents.push('event3');
-    if (document.getElementById('event4').checked) selectedEvents.push('event4');
-    if (document.getElementById('event5').checked) selectedEvents.push('event5');
-    if (document.getElementById('event6').checked) selectedEvents.push('event6');
+  // Pagination button event listeners
+  document.getElementById('next-page').addEventListener('click', function() {
+    if (currentPage * itemsPerPage < totalStudents) {
+      fetchStudents(currentPage + 1);
+    }
+  });
 
-    // Create a JSON object
-    const studentData = {
-        name: name,
-        email: email,
-        id: id,
-        school: school,
-        grade: grade,
-        password: password,
-        events: selectedEvents
+  document.getElementById('prev-page').addEventListener('click', function() {
+    if (currentPage > 1) {
+      fetchStudents(currentPage - 1);
+    }
+  });
+
+   // Open Add Student Modal
+   document.getElementById('add-new-student-button').addEventListener('click', function() {
+    document.getElementById('add-student-modal').classList.remove('hidden');
+  });
+
+  // Close Add Student Modal
+  function closeAddModal() {
+    document.getElementById('add-student-modal').classList.add('hidden');
+  }
+
+  // Add New Student to Firebase
+  document.getElementById('add-student-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const newStudent = {
+      name: document.getElementById('new-name').value,
+      email: document.getElementById('new-email').value,
+      school: document.getElementById('new-school').value,
+      grade: document.getElementById('new-grade').value,
+      id: document.getElementById('new-id').value,
+      password: document.getElementById('new-password').value,
+      events: Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+.map(checkbox => checkbox.value)
     };
 
-    // Convert the JSON object to a string and display it
-    const jsonOutput = JSON.stringify(studentData, null, 2);
-    document.getElementById('json-output').textContent = jsonOutput;
-}
-
-// Function to copy the JSON to clipboard
-function copyToClipboard() {
-    const jsonOutput = document.getElementById('json-output').textContent;
-    navigator.clipboard.writeText(jsonOutput).then(function() {
-        alert('JSON copied to clipboard!');
-    }).catch(function(err) {
-        alert('Failed to copy JSON: ' + err);
+    // Push to Firebase
+    db.ref('students').push(newStudent).then(() => {
+      closeAddModal();
+      fetchStudents(currentPage); // Re-fetch students to update the list
     });
-}
+  });
 
-// Load student data for email template
-async function loadStudentData() {
-    const response = await fetch('data/students.json');
-    const students = await response.json();
 
-    // Populate the dropdown with student names
-    const studentSelect = document.getElementById('student-select');
-    students.forEach(student => {
-        const option = document.createElement('option');
-        option.value = student.email;
-        option.textContent = `${student.name} - ${student.id}`;
-        studentSelect.appendChild(option);
-    });
-}
-
-// Function to generate Gmail link with email template
-function sendEmail() {
-    const studentSelect = document.getElementById('student-select');
-    const selectedEmail = studentSelect.value;
-    const selectedName = studentSelect.options[studentSelect.selectedIndex].text;
-
-    // Check if a student is selected
-    if (!selectedEmail) {
-        alert('Please select a student.');
-        return;
-    }
-
-    // Get selected student data
-    const students = JSON.parse(localStorage.getItem('students'));
-    const student = students.find(s => s.email === selectedEmail);
-
-    if (!student) {
-        alert('Student data not found.');
-        return;
-    }
-
-    // Create the email content with a template
-    const subject = encodeURIComponent('Student Data');
-    const body = encodeURIComponent(`
-        Hello,
-
-        I hope this message finds you well. Below is the information for ${selectedName}:
-
-        Name: ${student.name}
-        Email: ${student.email}
-        ID: ${student.id}
-        School: ${student.school}
-        Grade: ${student.grade}
-        Events: ${student.events.join(', ')}
-
-        Regards,
-        Admin
-    `);
-
-    // Create the Gmail link directly in the browser
-    const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${selectedEmail}&su=${subject}&body=${body}`;
-
-    // Open Gmail in the browser with the email template
-    window.open(mailtoLink, '_blank');
-}
-
-// Call the function to load the student data when the page is loaded
-window.onload = async () => {
-    await loadStudentData();
-    // Store the students' data in localStorage for easy access in sendEmail
-    const response = await fetch('data/students.json');
-    const students = await response.json();
-    localStorage.setItem('students', JSON.stringify(students));
-}
+  // Initial Data Fetch
+  getTotalStudentCount().then(() => fetchStudents(1));

@@ -6,8 +6,8 @@
   <title>Admin Dashboard - Student List</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Firebase CDN -->
-  <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-database-compat.js"></script>
 </head>
 <body class="bg-gray-800 text-white dark:bg-gray-900 dark:text-gray-100">
 
@@ -23,16 +23,90 @@
   <div class="p-8">
     <h1 class="text-3xl font-bold mb-8">Student Data</h1>
 
+    <!-- Add New Student Button -->
+    <button id="add-new-student-button" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg mb-4 transition duration-300 ease-in-out">
+      Add New Student
+    </button>
+
+    
+
+      <!-- Add New Student Modal -->
+  <div id="add-student-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex justify-center items-center">
+    <div class="bg-gray-700 p-6 rounded-lg max-w-md w-full">
+      <h2 class="text-xl font-bold mb-4">Add New Student</h2>
+      <form id="add-student-form">
+        <div class="mb-4">
+          <label class="block mb-2" for="new-name">Name</label>
+          <input type="text" id="new-name" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="new-email">Email</label>
+          <input type="email" id="new-email" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="new-school">School</label>
+          <input type="text" id="new-school" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="new-grade">Grade</label>
+          <input type="text" id="new-grade" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="new-id">ID</label>
+          <input type="text" id="new-id" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="new-password">Password</label>
+          <input type="password" id="new-password" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div>
+            <label class="inline-flex items-center mr-4">
+              <input type="checkbox" id="event1" value="event1" class="form-checkbox">
+              <span class="ml-2">Quiz Competition</span>
+            </label>
+            <label class="inline-flex items-center mr-4">
+              <input type="checkbox" id="event2" value="event2" class="form-checkbox">
+              <span class="ml-2">Video Editing</span>
+            </label>
+            <label class="inline-flex items-center mr-4">
+              <input type="checkbox" id="event3" value="event3" class="form-checkbox">
+              <span class="ml-2">Animation Competition</span>
+            </label>
+            <label class="inline-flex items-center mr-4">
+              <input type="checkbox" id="event4" value="event4" class="form-checkbox">
+              <span class="ml-2">Web Designing</span>
+            </label>
+            <label class="inline-flex items-center mr-4">
+              <input type="checkbox" id="event5" value="event5" class="form-checkbox">
+              <span class="ml-2">Digital Art</span>
+            </label>
+            <label class="inline-flex items-center mr-4">
+              <input type="checkbox" id="event6" value="event6" class="form-checkbox">
+              <span class="ml-2">Photo Manipulation</span>
+            </label>
+          </div>
+          
+          
+        <div class="flex justify-between mt-8">
+          <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg" onclick="closeAddModal()">Cancel</button>
+          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Add Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
     <!-- Table for Student Data -->
     <div class="overflow-x-auto">
       <table class="table-auto w-full bg-gray-700 text-left rounded-lg">
         <thead class="bg-gray-800">
           <tr>
-            <th class="p-4">#</th>
             <th class="p-4">Name</th>
             <th class="p-4">Email</th>
             <th class="p-4">School</th>
             <th class="p-4">Grade</th>
+            <th class="p-4">ID</th>
+            <th class="p-4">Events</th>
+            <th class="p-4">Actions</th>
           </tr>
         </thead>
         <tbody id="student-table-body">
@@ -53,97 +127,77 @@
     </div>
   </div>
 
+  <!-- Edit Student Modal -->
+  <div id="edit-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex justify-center items-center">
+    <div class="bg-gray-700 p-6 rounded-lg max-w-md w-full">
+      <h2 class="text-xl font-bold mb-4">Edit Student</h2>
+      <form id="edit-form">
+        <div class="mb-4">
+          <label class="block mb-2" for="edit-name">Name</label>
+          <input type="text" id="edit-name" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="edit-email">Email</label>
+          <input type="email" id="edit-email" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="edit-school">School</label>
+          <input type="text" id="edit-school" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="edit-grade">Grade</label>
+          <input type="text" id="edit-grade" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="edit-id">ID</label>
+          <input type="text" id="edit-id" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2" for="edit-password">Password</label>
+          <input type="password" id="edit-password" class="w-full p-2 bg-gray-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+            <label class="block mb-2" for="edit-events">Events</label>
+            <div>
+              <label class="inline-flex items-center mr-4">
+                <input type="checkbox" id="event1" value="event1" class="form-checkbox">
+                <span class="ml-2">Quiz Competition</span>
+              </label>
+              <label class="inline-flex items-center mr-4">
+                <input type="checkbox" id="event2" value="event2" class="form-checkbox">
+                <span class="ml-2">Video Editing</span>
+              </label>
+              <label class="inline-flex items-center mr-4">
+                <input type="checkbox" id="event3" value="event3" class="form-checkbox">
+                <span class="ml-2">Animation Competition</span>
+              </label>
+              <label class="inline-flex items-center mr-4">
+                <input type="checkbox" id="event4" value="event4" class="form-checkbox">
+                <span class="ml-2">Web Designing</span>
+              </label>
+              <label class="inline-flex items-center mr-4">
+                <input type="checkbox" id="event5" value="event5" class="form-checkbox">
+                <span class="ml-2">Digital Art</span>
+              </label>
+              <label class="inline-flex items-center mr-4">
+                <input type="checkbox" id="event6" value="event6" class="form-checkbox">
+                <span class="ml-2">Photo Manipulation</span>
+              </label>
+            </div>
+          </div>
+          
+        <div class="flex justify-between">
+          <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Firebase Config and Logic -->
-  <script>
+  <script src="admin.js">
     // Initialize Firebase
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID",
-      measurementId: "YOUR_MEASUREMENT_ID"
-    };
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    // Pagination Settings
-    const itemsPerPage = 5;
-    let currentPage = 1;
-    let totalStudents = 0;
-    let lastVisible = null;
-    let firstVisible = null;
-
-    // Get total student count (for pagination info)
-    function getTotalStudentCount() {
-      return db.collection('students').get().then(querySnapshot => {
-        totalStudents = querySnapshot.size;
-        updatePageInfo();
-      });
-    }
-
-    // Fetch student data with pagination
-    function fetchStudents(page) {
-      let query = db.collection('students').orderBy('name').limit(itemsPerPage);
-
-      if (page > 1 && lastVisible) {
-        query = query.startAfter(lastVisible);
-      } else if (page < currentPage && firstVisible) {
-        query = db.collection('students').orderBy('name').endBefore(firstVisible).limitToLast(itemsPerPage);
-      }
-
-      query.get().then(snapshot => {
-        const students = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        displayStudents(students);
-        currentPage = page;
-        lastVisible = snapshot.docs[snapshot.docs.length - 1];
-        firstVisible = snapshot.docs[0];
-        updatePageInfo();
-      });
-    }
-
-    // Display student data in the table
-    function displayStudents(students) {
-      const tableBody = document.getElementById('student-table-body');
-      tableBody.innerHTML = '';
-
-      students.forEach((student, index) => {
-        const row = `
-          <tr>
-            <td class="p-4">${index + 1 + (currentPage - 1) * itemsPerPage}</td>
-            <td class="p-4">${student.name}</td>
-            <td class="p-4">${student.email}</td>
-            <td class="p-4">${student.school}</td>
-            <td class="p-4">${student.grade}</td>
-          </tr>
-        `;
-        tableBody.innerHTML += row;
-      });
-    }
-
-    // Update pagination info
-    function updatePageInfo() {
-      const pageInfo = document.getElementById('page-info');
-      const totalPages = Math.ceil(totalStudents / itemsPerPage);
-      pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-    }
-
-    // Pagination button event listeners
-    document.getElementById('next-page').addEventListener('click', function() {
-      if (currentPage * itemsPerPage < totalStudents) {
-        fetchStudents(currentPage + 1);
-      }
-    });
-
-    document.getElementById('prev-page').addEventListener('click', function() {
-      if (currentPage > 1) {
-        fetchStudents(currentPage - 1);
-      }
-    });
-
-    // Initial Data Fetch
-    getTotalStudentCount().then(() => fetchStudents(1));
+    
   </script>
 
 </body>
