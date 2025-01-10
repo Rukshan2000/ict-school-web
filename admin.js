@@ -1,13 +1,12 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyDEaGjr6EqagrOHH6J9HTh9H6dWkWGjlZY",
-    authDomain: "ict-project-35ae5.firebaseapp.com",
-    databaseURL: "https://ict-project-35ae5-default-rtdb.firebaseio.com",
-    projectId: "ict-project-35ae5",
-    storageBucket: "ict-project-35ae5.firebasestorage.app",
-    messagingSenderId: "904522249416",
-    appId: "1:904522249416:web:498d1c011b439e621561fd",
-    measurementId: "G-BWQPS1GLV8"
-  };
+  apiKey: "AIzaSyDNALgHhVIUBJGzcMUFNMlwBOpuNdkWQJk",
+  authDomain: "ictvck-f5b4d.firebaseapp.com",
+  projectId: "ictvck-f5b4d",
+  storageBucket: "ictvck-f5b4d.firebasestorage.app",
+  messagingSenderId: "237518282571",
+  appId: "1:237518282571:web:2fc9afaf0520d328f652ce",
+  measurementId: "G-GS6PKG4BKJ"
+};
 
   const app = firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
